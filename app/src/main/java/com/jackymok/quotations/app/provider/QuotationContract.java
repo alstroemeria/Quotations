@@ -8,7 +8,7 @@ import android.util.Log;
  */
 public class QuotationContract {
 
-    public static final String TABLE__QUOTATION = "quotation";
+    public static final String TABLE_QUOTATION = "quotation";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_TEXT = "text";
     public static final String COLUMN_CATEGORY = "category";
@@ -17,7 +17,7 @@ public class QuotationContract {
     public static final String COLUMN_READ = "read";
 
     private static final String DATABASE_CREATE = "create table "
-            + TABLE__QUOTATION
+            + TABLE_QUOTATION
             + "("
             + COLUMN_ID + " integer primary key autoincrement, "
             + COLUMN_TEXT + " text not null,"
@@ -35,7 +35,7 @@ public class QuotationContract {
         Log.w(QuotationContract.class.getName(), "Upgrading database from version "
             + oldVersion + " to " + newVersion
             + ", which will destroy all old data");
-        database.execSQL("DROP TABLE ID EXISTS" + TABLE__QUOTATION);
+        database.execSQL("DROP TABLE ID EXISTS" + TABLE_QUOTATION);
         onCreate(database);
     }
 }

@@ -1,29 +1,30 @@
 package com.jackymok.quotations.app.ui;
 
-import android.content.Intent;
+import android.app.ActionBar;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBarActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jackymok.quotations.app.R;
+import com.jackymok.quotations.app.utils.TypefaceSpan;
 
-public class HomeActivity extends BaseActivty implements CategoryFragment.onListViewItemClickedListener{
-
+/**
+ * Created by Jacky on 10/03/14.
+ */
+public class BaseActivty extends ActionBarActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setActionBar("quotations");
 
-        FragmentManager transaction = getSupportFragmentManager();
-        transaction.beginTransaction()
-                .replace(R.id.content_frame,new CategoryFragment(),"CATEGORY_FRAGMENT")
-                .commit();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
@@ -41,11 +42,18 @@ public class HomeActivity extends BaseActivty implements CategoryFragment.onList
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onListViewItemClicked(long id, String category) {
-        Intent intent = new Intent(this, QuotationActivity.class);
-        intent.putExtra(QuotationActivity.CATEGORY_ID, id);
-        intent.putExtra(QuotationActivity.CATEGORY_KEY,category);
-        startActivity(intent);
+
+    private void setActionBar(String title) {
+        SpannableString s = new SpannableString(title);
+        s.setSpan(new TypefaceSpan(this, "Roboto-Thin.ttf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+        // Update the action bar title with the TypefaceSpan instance
+        if (android.os.Build.VERSION.SDK_INT >= 11){
+            ActionBar actionBar = getActionBar();
+            actionBar.setTitle(s);
+            actionBar.setDisplayShowHomeEnabled(false);
+        }
     }
 }

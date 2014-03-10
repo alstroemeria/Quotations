@@ -1,7 +1,6 @@
 package com.jackymok.quotations.app.ui;
 
 
-import android.app.ActionBar;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,24 +9,24 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBarActivity;
-import android.text.Spannable;
-import android.text.SpannableString;
 import android.view.MenuItem;
 
 import com.jackymok.quotations.app.R;
 import com.jackymok.quotations.app.provider.QuotationContract;
 import com.jackymok.quotations.app.provider.QuotationProvider;
-import com.jackymok.quotations.app.utils.TypefaceSpan;
 
 ;
 
-public class QuotationActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class QuotationActivity extends BaseActivty implements LoaderManager.LoaderCallbacks<Cursor> {
 
-    private static final int NUM_PAGES = 5;
+
+    public static final String CATEGORY_KEY = "CATEGORY_KEY";
+    public static final String CATEGORY_ID = "CATEGORY_ID" ;
+
     private ViewPager mPager;
     private CursorPagerAdapter mPagerAdapter;
-
+    private String filter;
+    private String mCategory;
 
 
     @Override
@@ -35,14 +34,10 @@ public class QuotationActivity extends ActionBarActivity implements LoaderManage
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quotations);
 
-//        ContentValues values = new ContentValues();
-//        values.put(QuotationContract.COLUMN_TEXT, "Kind words do not cost much. Yet they accomplish much." );
-//        values.put(QuotationContract.COLUMN_AUTHOR, "Jacky Mok");
-//        values.put(QuotationContract.COLUMN_CATEGORY, 1);
-//        values.put(QuotationContract.COLUMN_FAVOURITE, 1);
-//        values.put(QuotationContract.COLUMN_READ, 0);
-//
-//        Log.d("SQLITE", getContentResolver().insert(QuotationProvider.CONTENT_URI, values).toString());
+
+        Intent intent = getIntent();
+        String mCategory = intent.getStringExtra(CATEGORY_KEY);
+        filter = QuotationContract.COLUMN_CATEGORY + " = " + intent.getLongExtra(CATEGORY_ID,1);
 
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new CursorPagerAdapter<QuotationFragment>(getSupportFragmentManager()
@@ -60,24 +55,8 @@ public class QuotationActivity extends ActionBarActivity implements LoaderManage
         });
 
         getSupportLoaderManager().initLoader(0, null, this);
-
-        setActionBar();
-
     }
 
-    private void setActionBar() {
-        SpannableString s = new SpannableString("inspirational");
-        s.setSpan(new TypefaceSpan(this, "Roboto-Thin.ttf"), 0, s.length(),
-                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
-        // Update the action bar title with the TypefaceSpan instance
-        if (android.os.Build.VERSION.SDK_INT >= 11){
-            ActionBar actionBar = getActionBar();
-            actionBar.setTitle(s);
-            actionBar.setDisplayShowHomeEnabled(false);
-        }
-    }
 
 
     @Override
@@ -108,9 +87,10 @@ public class QuotationActivity extends ActionBarActivity implements LoaderManage
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {QuotationContract.COLUMN_ID,QuotationContract.COLUMN_TEXT,
-                QuotationContract.COLUMN_AUTHOR,QuotationContract.COLUMN_FAVOURITE,
+                QuotationContract.COLUMN_AUTHOR, QuotationContract.COLUMN_FAVOURITE,
                  QuotationContract.COLUMN_READ, QuotationContract.COLUMN_CATEGORY};
-        CursorLoader cursorLoader = new CursorLoader(this, QuotationProvider.CONTENT_URI, projection,null,null,null);
+        CursorLoader cursorLoader = new CursorLoader(this, QuotationProvider.CONTENT_URI_QUOTAIONS,
+                projection, filter , null, null);
         mPagerAdapter.setProjection(projection);
         return cursorLoader;
     }

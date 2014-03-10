@@ -18,26 +18,41 @@ import java.util.HashSet;
  */
 public class QuotationProvider extends ContentProvider {
     private QuotationDatabase database;
+
     private static final int QUOTATIONS = 10;
     private static final int QUOTATION_ID = 20;
+    private static final int CATEGORIES = 30;
+    private static final int CATEGORY_ID = 40;
 
     private static String AUTHORITY = "com.jackymok.quotations.app.provider";
-    private static final String BASE_PATH = "quotations";
-    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
-    public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
+
+    private static final String PATH_QUOTATIONS = "quotations";
+    private static final String PATH_CATEGORIES = "categories";
+
+    public static final Uri CONTENT_URI_QUOTAIONS = Uri.parse("content://" + AUTHORITY + "/" + PATH_QUOTATIONS);
+    public static final Uri CONTENT_URI_CATEGORIES = Uri.parse("content://" + AUTHORITY + "/" + PATH_CATEGORIES);
+
+    public static final String CONTENT_TYPE_QUOTATION = ContentResolver.CURSOR_DIR_BASE_TYPE
             + "/quotations";
-    public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
+    public static final String CONTENT_ITEM_TYPE_QUOTATION = ContentResolver.CURSOR_ITEM_BASE_TYPE
             + "/quotation";
+    public static final String CONTENT_TYPE_CATEGORY = ContentResolver.CURSOR_DIR_BASE_TYPE
+            + "/categories";
+    public static final String CONTENT_ITEM_TYPE_CATEGORY = ContentResolver.CURSOR_ITEM_BASE_TYPE
+            + "/category";
 
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
-        sURIMatcher.addURI(AUTHORITY, BASE_PATH, QUOTATIONS);
-        sURIMatcher.addURI(AUTHORITY, BASE_PATH + "/#", QUOTATION_ID);
+        sURIMatcher.addURI(AUTHORITY, PATH_QUOTATIONS, QUOTATIONS);
+        sURIMatcher.addURI(AUTHORITY, PATH_QUOTATIONS + "/#", QUOTATION_ID);
+        sURIMatcher.addURI(AUTHORITY, PATH_CATEGORIES, CATEGORIES);
+        sURIMatcher.addURI(AUTHORITY, PATH_CATEGORIES + "/#", CATEGORIES);
     }
 
     @Override
     public boolean onCreate() {
         database = new QuotationDatabase(getContext());
+
         return false;
     }
     @Override
@@ -45,21 +60,31 @@ public class QuotationProvider extends ContentProvider {
 
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
         checkColumns(projection);
-        queryBuilder.setTables(QuotationContract.TABLE__QUOTATION);
 
         int uriType = sURIMatcher.match(uri);
+
+
         switch (uriType){
             case QUOTATIONS:
+                queryBuilder.setTables(QuotationContract.TABLE_QUOTATION);
                 break;
             case QUOTATION_ID:
+                queryBuilder.setTables(QuotationContract.TABLE_QUOTATION);
                 queryBuilder.appendWhere(QuotationContract.COLUMN_ID + "=" + uri.getLastPathSegment());
+                break;
+            case CATEGORIES:
+                queryBuilder.setTables(CategoryContract.TABLE_CATEGORY);
+                break;
+            case CATEGORY_ID:
+                queryBuilder.setTables(CategoryContract.TABLE_CATEGORY);
+                queryBuilder.appendWhere(CategoryContract.COLUMN_ID + "=" + uri.getLastPathSegment());
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
 
         SQLiteDatabase db = database.getWritableDatabase();
-        Cursor cursor = queryBuilder.query(db,projection,selection,selectionArgs,null,null, sortOrder);
+        Cursor cursor = queryBuilder.query(db, projection, selection, selectionArgs, null, null, sortOrder);
         cursor.setNotificationUri(getContext().getContentResolver(),uri);
 
         return cursor;
@@ -75,15 +100,21 @@ public class QuotationProvider extends ContentProvider {
         int uriType = sURIMatcher.match(uri);
         SQLiteDatabase db = database.getWritableDatabase();
         long id = 0;
+        Uri returnValue = null;
         switch (uriType) {
             case QUOTATIONS:
-                id = db.replace(QuotationContract.TABLE__QUOTATION, null, values);
+                id = db.replace(QuotationContract.TABLE_QUOTATION, null, values);
+                returnValue =  Uri.parse(PATH_QUOTATIONS + "/"+id);
+                break;
+            case CATEGORIES:
+                id = db.replace(CategoryContract.TABLE_CATEGORY, null, values);
+                returnValue =  Uri.parse(PATH_QUOTATIONS + "/"+id);
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri,null);
-        return Uri.parse(BASE_PATH + "/"+id);
+        return returnValue;
     }
 
     @Override
@@ -93,17 +124,17 @@ public class QuotationProvider extends ContentProvider {
         int rowsDeleted = 0;
         switch(uriType){
             case QUOTATIONS:
-                rowsDeleted = db.delete(QuotationContract.TABLE__QUOTATION,
+                rowsDeleted = db.delete(QuotationContract.TABLE_QUOTATION,
                         selection,selectionArgs);
                 break;
             case QUOTATION_ID:
                 String id = uri.getLastPathSegment();
                 if (TextUtils.isEmpty(selection)){
-                    rowsDeleted = db.delete(QuotationContract.TABLE__QUOTATION,
+                    rowsDeleted = db.delete(QuotationContract.TABLE_QUOTATION,
                             QuotationContract.COLUMN_ID + "=" + id + " and " + selection, null);
                 }
                 else{
-                    rowsDeleted = db.delete(QuotationContract.TABLE__QUOTATION,
+                    rowsDeleted = db.delete(QuotationContract.TABLE_QUOTATION,
                             QuotationContract.COLUMN_ID + "=" +id + "and" + selection, selectionArgs);
                 }
                 break;
@@ -121,16 +152,16 @@ public class QuotationProvider extends ContentProvider {
         int rowsUpdated = 0;
         switch (uriType){
             case QUOTATIONS:
-                rowsUpdated = db.update(QuotationContract.TABLE__QUOTATION,values,selection, selectionArgs);
+                rowsUpdated = db.update(QuotationContract.TABLE_QUOTATION,values,selection, selectionArgs);
                 break;
             case QUOTATION_ID:
                 String id = uri.getLastPathSegment();
                 if (TextUtils.isEmpty(selection)){
-                    rowsUpdated = db.update(QuotationContract.TABLE__QUOTATION,
+                    rowsUpdated = db.update(QuotationContract.TABLE_QUOTATION,
                             values, QuotationContract.COLUMN_ID + "=" + id + " and " + selection, null);
                 }
                 else{
-                    rowsUpdated = db.update(QuotationContract.TABLE__QUOTATION,
+                    rowsUpdated = db.update(QuotationContract.TABLE_QUOTATION,
                             values, QuotationContract.COLUMN_ID + "=" + id + "and" + selection, selectionArgs);
                 }
                 break;

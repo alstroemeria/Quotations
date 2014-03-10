@@ -27,8 +27,7 @@
             android:textSize="32dp"
             android:textColor="@color/flatui_pomegranate"
             android:text="- Jacky Mok"
-            android:textAlignment="gravity"
-            android:gravity="right" />
+            android:textAlignment="gravity" />
 
     </LinearLayout>
 </ScrollView>
