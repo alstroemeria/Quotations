@@ -1,6 +1,7 @@
 package com.jackymok.quotations.app.ui;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -10,11 +11,16 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.MenuItem;
 
 import com.jackymok.quotations.app.R;
 import com.jackymok.quotations.app.provider.QuotationContract;
 import com.jackymok.quotations.app.provider.QuotationProvider;
+import com.jackymok.quotations.app.utils.TypefaceSpan;
+
+;
 
 public class QuotationActivity extends ActionBarActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -55,6 +61,21 @@ public class QuotationActivity extends ActionBarActivity implements LoaderManage
 
         getSupportLoaderManager().initLoader(0, null, this);
 
+        setActionBar();
+
+    }
+
+    private void setActionBar() {
+        SpannableString s = new SpannableString("Quotey");
+        s.setSpan(new TypefaceSpan(this, "Roboto-Light.ttf"), 0, s.length(),
+                Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Update the action bar title with the TypefaceSpan instance
+        if (android.os.Build.VERSION.SDK_INT >= 11){
+            ActionBar actionBar = getActionBar();
+            actionBar.setTitle(s);
+            actionBar.setDisplayShowHomeEnabled(false);
+        }
     }
 
 

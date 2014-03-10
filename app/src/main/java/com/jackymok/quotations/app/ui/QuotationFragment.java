@@ -16,6 +16,7 @@ import com.jackymok.quotations.app.provider.QuotationContract;
 public class QuotationFragment extends Fragment {
     public static final String ARG_PAGE = "page";
     private String mText;
+    private String mAuthor;
 
     public QuotationFragment() {
     }
@@ -32,6 +33,7 @@ public class QuotationFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         mText = getArguments().getString(QuotationContract.COLUMN_TEXT);
+        mAuthor = getArguments().getString(QuotationContract.COLUMN_AUTHOR);
 
     }
 
@@ -39,7 +41,9 @@ public class QuotationFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_quotation, container, false);
-        ((TextView) rootView.findViewById(R.id.fragment_quotation_text)).setText(mText);
+        ((TextView) rootView.findViewById(R.id.fragment_quotation_text)).setText("\""+mText+"\"");
+        ((TextView) rootView.findViewById(R.id.fragment_quotation_author)).setText("-"+ mAuthor);
+
         return rootView;
     }
 
