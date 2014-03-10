@@ -66,7 +66,7 @@ public class QuotationActivity extends ActionBarActivity implements LoaderManage
     }
 
     private void setActionBar() {
-        SpannableString s = new SpannableString("quotey");
+        SpannableString s = new SpannableString("inspirational");
         s.setSpan(new TypefaceSpan(this, "Roboto-Thin.ttf"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 

@@ -10,6 +10,9 @@ import android.graphics.Typeface;
 import android.support.v4.util.LruCache;
 import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
+import android.util.TypedValue;
+
+import com.jackymok.quotations.app.R;
 
 
 public class TypefaceSpan extends MetricAffectingSpan {
@@ -18,36 +21,44 @@ public class TypefaceSpan extends MetricAffectingSpan {
             new LruCache<String, Typeface>(12);
 
     private Typeface mTypeface;
+    private Context mContext;
+
 
     public TypefaceSpan(Context context, String typefaceName) {
         mTypeface = sTypefaceCache.get(typefaceName);
+        mContext = context;
 
         if (mTypeface == null) {
-            mTypeface = Typeface.createFromAsset(context.getApplicationContext()
+            mTypeface = Typeface.createFromAsset(mContext.getApplicationContext()
                     .getAssets(), String.format("fonts/%s", typefaceName));
 
             // Cache the loaded Typeface
             sTypefaceCache.put(typefaceName, mTypeface);
         }
     }
-
-    @Override
-    public void updateMeasureState(TextPaint p) {
-
-        int MY_DIP_VALUE = 5; //5dp
+    private void modifyPaint(TextPaint p) {
+        int MY_DIP_VALUE = 32;
+        int pixel= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+                MY_DIP_VALUE, mContext.getResources().getDisplayMetrics());
 
         p.setTypeface(mTypeface);
         // Note: This flag is required for proper typeface rendering
         p.setFlags(p.getFlags() | Paint.SUBPIXEL_TEXT_FLAG);
-        p.setTextSize(100);//or what ever size you want
+        p.setTextSize(pixel);//or what ever size you want
+
+        p.setColor( mContext.getResources().getColor(R.color.flatui_belize_hole));
+
+    }
+
+    @Override
+    public void updateMeasureState(TextPaint p) {
+
+        modifyPaint(p);
     }
 
     @Override
     public void updateDrawState(TextPaint tp) {
-        tp.setTypeface(mTypeface);
-        // Note: This flag is required for proper typeface rendering
-        tp.setFlags(tp.getFlags() | Paint.SUBPIXEL_TEXT_FLAG);
-        tp.setTextSize(100);//or what ever size you want
+        modifyPaint(tp);
     }
 
 
