@@ -17,16 +17,16 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif-thin"
             android:textSize="36dp"
-            android:textColor="#34495e"
+            android:textColor="#8e44ad"
             android:text="@string/lorem_ipsum" />
         <TextView
             android:id = "@+id/fragment_quotation_author"
             android:lineSpacingMultiplier="1.1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif-thin"
-            android:textSize="36dp"
-            android:textColor="#34495e"
+            android:fontFamily="sans-serif-light"
+            android:textSize="16dp"
+            android:textColor="#8e44ad"
             android:text="- Jacky Mok"
             android:textAlignment="gravity"
             android:gravity="right" />

@@ -33,17 +33,22 @@ public class TypefaceSpan extends MetricAffectingSpan {
 
     @Override
     public void updateMeasureState(TextPaint p) {
-        p.setTypeface(mTypeface);
 
+        int MY_DIP_VALUE = 5; //5dp
+
+        p.setTypeface(mTypeface);
         // Note: This flag is required for proper typeface rendering
         p.setFlags(p.getFlags() | Paint.SUBPIXEL_TEXT_FLAG);
+        p.setTextSize(100);//or what ever size you want
     }
 
     @Override
     public void updateDrawState(TextPaint tp) {
         tp.setTypeface(mTypeface);
-
         // Note: This flag is required for proper typeface rendering
         tp.setFlags(tp.getFlags() | Paint.SUBPIXEL_TEXT_FLAG);
+        tp.setTextSize(100);//or what ever size you want
     }
+
+
 }

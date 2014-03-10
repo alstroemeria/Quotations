@@ -66,9 +66,10 @@ public class QuotationActivity extends ActionBarActivity implements LoaderManage
     }
 
     private void setActionBar() {
-        SpannableString s = new SpannableString("Quotey");
-        s.setSpan(new TypefaceSpan(this, "Roboto-Light.ttf"), 0, s.length(),
+        SpannableString s = new SpannableString("quotey");
+        s.setSpan(new TypefaceSpan(this, "Roboto-Thin.ttf"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
 
         // Update the action bar title with the TypefaceSpan instance
         if (android.os.Build.VERSION.SDK_INT >= 11){
