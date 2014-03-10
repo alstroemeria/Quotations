@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jackymok.quotations.app" >
 
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -18,7 +19,7 @@
         </activity>
 
         <provider
-            android:name="com.jackymok.quotations.app.provider.QuotationProvider"
+            android:name=".provider.QuotationProvider"
             android:authorities="com.jackymok.quotations.app.provider" >
         </provider>
 

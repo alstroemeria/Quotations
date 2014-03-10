@@ -5,15 +5,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.jackymok.quotations.app.R;
+import com.jackymok.quotations.app.provider.QuotationContract;
 
 /**
  * Created by Jacky on 09/03/14.
  */
 public class QuotationFragment extends Fragment {
     public static final String ARG_PAGE = "page";
-    private int mPageNumber;
+    private String mText;
 
     public QuotationFragment() {
     }
@@ -29,18 +31,16 @@ public class QuotationFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mPageNumber = getArguments().getInt(ARG_PAGE);
+        mText = getArguments().getString(QuotationContract.COLUMN_TEXT);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_quotation, container, false);
-//        ((TextView) rootView.findViewById(android.R.id.text1)).setText(
-//                getString(R.string.title_template_step, mPageNumber +1));
+        ((TextView) rootView.findViewById(R.id.fragment_quotation_text)).setText(mText);
         return rootView;
     }
-    public int getPageNumber() {
-        return mPageNumber;
-    }
+
 }

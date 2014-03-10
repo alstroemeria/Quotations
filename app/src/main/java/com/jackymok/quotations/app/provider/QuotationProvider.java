@@ -23,7 +23,7 @@ public class QuotationProvider extends ContentProvider {
 
     private static String AUTHORITY = "com.jackymok.quotations.app.provider";
     private static final String BASE_PATH = "quotations";
-    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY);
+    public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/" + BASE_PATH);
     public static final String CONTENT_TYPE = ContentResolver.CURSOR_DIR_BASE_TYPE
             + "/quotations";
     public static final String CONTENT_ITEM_TYPE = ContentResolver.CURSOR_ITEM_BASE_TYPE
@@ -74,17 +74,16 @@ public class QuotationProvider extends ContentProvider {
     public Uri insert(Uri uri, ContentValues values) {
         int uriType = sURIMatcher.match(uri);
         SQLiteDatabase db = database.getWritableDatabase();
-        int rowsDeleted = 0;
-        long id =0;
-        switch (uriType){
+        long id = 0;
+        switch (uriType) {
             case QUOTATIONS:
-                id = db.insert(QuotationContract.TABLE__QUOTATION,null,values);
+                id = db.replace(QuotationContract.TABLE__QUOTATION, null, values);
                 break;
             default:
-                throw new IllegalArgumentException("Unknown URI:"+ uri);
+                throw new IllegalArgumentException("Unknown URI: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri,null);
-        return Uri.parse(BASE_PATH+ "/"+id);
+        return Uri.parse(BASE_PATH + "/"+id);
     }
 
     @Override
