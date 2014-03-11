@@ -9,4 +9,12 @@
     <string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Lorem Ipsum</string>
     <string name="lorem_ipsum"><![CDATA["Physicists say we are made of stardust. Intergalactic debris and far-flung atoms, shards of carbon nanomatter rounded up by gravity to circle the sun. As atoms pass through an eternal revolving door of possible form, energy and mass dance in fluid relationship. We are stardust, we are man, we are thought. We are story. "]]></string>
 
+    <string-array name="menu_array">
+        <item>Activity</item>
+        <item>Categories</item>
+    </string-array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+
 </resources>

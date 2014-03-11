@@ -17,7 +17,7 @@ import com.jackymok.quotations.app.provider.QuotationProvider;
 
 ;
 
-public class QuotationActivity extends BaseActivty implements LoaderManager.LoaderCallbacks<Cursor> {
+public class QuotationActivity extends BaseActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
     public static final String CATEGORY_KEY = "CATEGORY_KEY";
