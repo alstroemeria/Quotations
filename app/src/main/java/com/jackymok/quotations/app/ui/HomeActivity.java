@@ -2,6 +2,7 @@ package com.jackymok.quotations.app.ui;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -21,12 +22,9 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
-
-
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mMenuTitles;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,22 +40,35 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        // The action bar home/up action should open or close the drawer.
+        // ActionBarDrawerToggle will take care of this.
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
+        // Handle action buttons
         return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
     }
 
     @Override
@@ -67,6 +78,7 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
         intent.putExtra(QuotationActivity.CATEGORY_KEY,category);
         startActivity(intent);
     }
+
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private void setupDrawer() {
@@ -107,6 +119,7 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
         mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
+
     /* The click listner for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -129,7 +142,7 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
 
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);
-        setTitle(mMenuTitles[position]);
+       // setTitle(mMenuTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 
