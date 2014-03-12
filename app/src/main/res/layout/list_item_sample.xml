@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@drawable/card_no_border"
+    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:padding="2dp"
+    android:id="@+id/panel_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.etsy.android.grid.util.DynamicHeightTextView
+        android:id="@+id/staggered_text"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_width="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/flatui_midnight_blue"
+        android:textSize="16dp"
+        android:text="Dog Tag">
+        </com.etsy.android.grid.util.DynamicHeightTextView>
+    <!--<Button-->
+        <!--android:id="@+id/btn_go"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="top|right"-->
+        <!--android:visibility="invisible"-->
+        <!--android:text="Go" />-->
+</LinearLayout>

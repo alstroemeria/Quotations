@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 import com.jackymok.quotations.app.R;
 
-public class HomeActivity extends BaseActivity implements CategoryFragment.onListViewItemClickedListener{
+public class HomeActivity extends BaseActivity implements CategoryFragment.onListViewItemClickedListener {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -32,10 +32,10 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
         setContentView(R.layout.activity_main);
 
         setupDrawer();
-
         if (savedInstanceState == null) {
             selectItem(0);
         }
+
     }
 
     @Override
@@ -57,7 +57,21 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
         return super.onOptionsItemSelected(item);
     }
 
+    //================================================================================
+    // CATEGORYFRAGMENT
+    //================================================================================
+    @Override
+    public void onListViewItemClicked(long id, String category) {
+        Intent intent = new Intent(this, QuotationActivity.class);
+        intent.putExtra(QuotationActivity.CATEGORY_ID, id);
+        intent.putExtra(QuotationActivity.CATEGORY_KEY, category);
+        startActivity(intent);
+    }
 
+
+    //================================================================================
+    // DRAWER
+    //================================================================================
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
@@ -70,15 +84,6 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
         super.onConfigurationChanged(newConfig);
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
-    @Override
-    public void onListViewItemClicked(long id, String category) {
-        Intent intent = new Intent(this, QuotationActivity.class);
-        intent.putExtra(QuotationActivity.CATEGORY_ID, id);
-        intent.putExtra(QuotationActivity.CATEGORY_KEY,category);
-        startActivity(intent);
-    }
-
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private void setupDrawer() {
@@ -134,8 +139,14 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
         FragmentManager transaction = getSupportFragmentManager();
         switch (position){
             default:
+            case 0:
                 transaction.beginTransaction()
                         .replace(R.id.content_frame,new CategoryFragment(),"CATEGORY_FRAGMENT")
+                        .commit();
+                break;
+            case 1:
+                transaction.beginTransaction()
+                        .replace(R.id.content_frame,new StaggeredGridFragment(),"STAGGERED_GRID_FRAGMENT")
                         .commit();
                 break;
         }

@@ -84,6 +84,9 @@ public class QuotationActivity extends BaseActivity implements LoaderManager.Loa
         return super.onOptionsItemSelected(item);
     }
 
+    //================================================================================
+    // LOADER
+    //================================================================================
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {QuotationContract.COLUMN_ID,QuotationContract.COLUMN_TEXT,
@@ -103,6 +106,5 @@ public class QuotationActivity extends BaseActivity implements LoaderManager.Loa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         mPagerAdapter.swapCursor(null);
-
     }
 }
