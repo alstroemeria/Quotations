@@ -135,18 +135,17 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
 
     private void selectItem(int position) {
 
-        String item = getResources().getStringArray(R.array.menu_array)[position];
         FragmentManager transaction = getSupportFragmentManager();
         switch (position){
             default:
             case 0:
                 transaction.beginTransaction()
-                        .replace(R.id.content_frame,new CategoryFragment(),"CATEGORY_FRAGMENT")
+                        .replace(R.id.content_frame,new StaggeredGridFragment(),"STAGGERED_GRID_FRAGMENT")
                         .commit();
                 break;
             case 1:
                 transaction.beginTransaction()
-                        .replace(R.id.content_frame,new StaggeredGridFragment(),"STAGGERED_GRID_FRAGMENT")
+                        .replace(R.id.content_frame,new CategoryFragment(),"CATEGORY_FRAGMENT")
                         .commit();
                 break;
         }

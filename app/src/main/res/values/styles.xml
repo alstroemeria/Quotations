@@ -5,4 +5,27 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="ShopAvatarSmall">
+        <item name="android:background">@drawable/bg_avatar_rounded_square_small_borderless</item>
+    </style>
+
+    <style name="TextGrey">
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="TextGrey.Small" parent="@style/TextGrey">
+        <item name="android:textSize">@dimen/text_small</item>
+    </style>
+
+    <style name="TextLightGrey" parent="@style/TextGrey">
+        <item name="android:textColor">@color/light_grey</item>
+    </style>
+
+    <style name="TextLightGrey.Small" parent="@style/TextLightGrey">
+        <item name="android:textSize">@dimen/text_small</item>
+    </style>
+
+
+
 </resources>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/image_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_medium_large"
+        android:layout_marginTop="@dimen/margin_medium_large"
+        android:layout_marginRight="@dimen/margin_medium_large" />
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:id="@+id/bottom"
+        android:paddingLeft="@dimen/margin_medium_large"
+        android:paddingTop="@dimen/padding_medium"
+        android:paddingRight="@dimen/margin_medium_large"
+        android:paddingBottom="@dimen/padding_medium_large"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/avatar"
+            android:visibility="gone"
+            android:layout_width="@dimen/shop_avatar_small"
+            android:layout_height="@dimen/shop_avatar_small"
+            android:layout_marginRight="@dimen/margin_medium"
+            android:scaleType="centerCrop"
+            android:layout_centerVertical="true"
+            style="@style/ShopAvatarSmall" />
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:layout_width="0.0dip"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0">
+
+            <TextView
+                android:ellipsize="end"
+                android:id="@+id/subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:drawablePadding="@dimen/padding_medium"
+                style="@style/TextLightGrey" />
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <!--<com.etsy.android.ui.view.RatingIconView android:id="@id/rating" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="@dimen/margin_small" app:starSize="@dimen/review_star_size_small" />-->
+                <TextView
+                    android:id="@+id/rating_count"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextGrey.Small" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</merge>
