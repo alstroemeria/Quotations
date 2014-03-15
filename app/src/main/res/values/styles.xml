@@ -5,4 +5,76 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="ShopAvatarSmall">
+        <item name="android:background">@drawable/bg_avatar_rounded_square_small_borderless</item>
+    </style>
+
+    <style name="TextBlack">
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
+    <style name="TextBlack.Larger" parent="@style/TextBlack">
+        <item name="android:textSize">@dimen/text_larger</item>
+    </style>
+
+    <style name="TextGrey">
+        <item name="android:textSize">@dimen/text_medium</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+    <style name="TextGrey.Small" parent="@style/TextGrey">
+        <item name="android:textSize">@dimen/text_small</item>
+    </style>
+
+    <style name="TextLightGrey" parent="@style/TextGrey">
+        <item name="android:textColor">@color/light_grey</item>
+    </style>
+
+    <style name="TextLightGrey.Small" parent="@style/TextLightGrey">
+        <item name="android:textSize">@dimen/text_small</item>
+    </style>
+
+    <style name="CardStyle">
+        <item name="android:background">@drawable/bg_card</item>
+        <item name="android:padding">@dimen/card_shadow_padding</item>
+    </style>
+
+    <style name="CardStyle.Listing" parent="@style/CardStyle">
+        <item name="android:background">@drawable/bg_card</item>
+        <item name="android:padding">@dimen/listing_card_shadow_padding</item>
+        <item name="android:drawSelectorOnTop">true</item>
+        <item name="android:foreground">@drawable/fg_card_selector</item>
+    </style>
+
+    <style name="EtsyWidget" />
+
+
+    <style name="IconFavorite.Listing" parent="@style/EtsyWidget">
+        <item name="android:background">@drawable/bg_ten_percent_black_selector</item>
+        <item name="android:padding">@dimen/listing_card_fav_padding</item>
+        <item name="android:src">@drawable/ic_listing_unfavorite</item>
+        <item name="android:contentDescription">@string/favorite_listing_content_description</item>
+    </style>
+
+    <dimen name="card_shadow_padding">4.0dip</dimen>
+    <item type="dimen" name="listing_card_shadow_padding">@dimen/card_shadow_padding</item>
+
+
+    <style name="TextGreen" parent="@style/TextGrey">
+        <item name="android:textColor">@color/the_color_of_money</item>
+    </style>
+    <style name="TextGreen.Bold" parent="@style/TextGreen">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextGreen.Larger" parent="@style/TextGreen">
+        <item name="android:textSize">@dimen/text_larger</item>
+    </style>
+    <style name="TextGreen.Larger.Bold" parent="@style/TextGreen.Larger">
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="TextGreen.Small" parent="@style/TextGreen">
+        <item name="android:textSize">@dimen/text_small</item>
+    </style>
+
 </resources>

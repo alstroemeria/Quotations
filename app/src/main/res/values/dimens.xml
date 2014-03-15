@@ -3,4 +3,35 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    </resources>
+    <dimen name="gen_avatar_border_shadow">1.0dip</dimen>
+    <dimen name="gen_avatar_corners_large">6.0dip</dimen>
+    <dimen name="gen_avatar_corners_small">4.0dip</dimen>
+
+    <dimen name="margin_large">16.0dip</dimen>
+    <dimen name="margin_large_xlarge">24.0dip</dimen>
+    <dimen name="margin_medium">8.0dip</dimen>
+    <dimen name="margin_medium_large">12.0dip</dimen>
+    <dimen name="margin_small">4.0dip</dimen>
+    <dimen name="margin_tiny">2.0dip</dimen>
+    <dimen name="margin_xlarge">32.0dip</dimen>
+    <dimen name="margin_xxlarge">48.0dip</dimen>
+
+    <dimen name="padding_medium">8.0dip</dimen>
+    <dimen name="padding_medium_large">12.0dip</dimen>
+    <dimen name="shop_avatar_small">44.0dip</dimen>
+
+    <dimen name="text_small">12.0sp</dimen>
+    <dimen name="text_medium">14.0sp</dimen>
+    <dimen name="text_larger">18.0sp</dimen>
+
+    <dimen name="divider_height">1.0dip</dimen>
+
+    <dimen name="padding_small">4.0dip</dimen>
+    <dimen name="padding_tiny">2.0dip</dimen>
+    <dimen name="listing_card_fav_padding">6.0dip</dimen>
+
+
+
+
+
+</resources>

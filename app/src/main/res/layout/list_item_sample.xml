@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="@drawable/bg_card"
+    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:orientation="vertical"
+    android:padding="2dp"
+    android:id="@+id/panel_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/flatui_turquoise">
+        <com.etsy.android.grid.util.DynamicHeightTextView
+            android:id="@+id/staggered_text"
+            android:layout_height="wrap_content"
+            android:layout_margin="12dp"
+            android:layout_width="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/flatui_clouds"
+            android:textSize="16dp"
+            android:text="@string/lorem_ipsum">
+            </com.etsy.android.grid.util.DynamicHeightTextView>
+    </FrameLayout>
+    <com.etsy.android.grid.util.DynamicHeightTextView
+        android:id="@+id/staggered_text"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_width="wrap_content"
+        android:fontFamily="sans-serif-light"
+        android:textColor="@color/flatui_asbestos"
+        android:textSize="16dp"
+        android:text="Oscar Wilde">
+    </com.etsy.android.grid.util.DynamicHeightTextView>
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_go"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_gravity="top|right"-->
+        <!--android:visibility="invisible"-->
+        <!--android:text="Go" />-->
+</LinearLayout>
