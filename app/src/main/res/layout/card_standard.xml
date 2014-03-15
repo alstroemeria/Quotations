@@ -6,9 +6,18 @@
         android:id="@+id/image_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/margin_medium_large"
-        android:layout_marginTop="@dimen/margin_medium_large"
-        android:layout_marginRight="@dimen/margin_medium_large" />
+        android:background="@color/flatui_belize_hole">
+        <com.etsy.android.grid.util.DynamicHeightTextView
+            android:id="@+id/staggered_text"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/flatui_clouds"
+            android:textSize="16dp"
+            android:text="@string/lorem_ipsum"
+            android:padding="@dimen/margin_medium_large">
+        </com.etsy.android.grid.util.DynamicHeightTextView>
+    </LinearLayout>
 
     <LinearLayout
         android:gravity="center_vertical"
@@ -21,15 +30,16 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/avatar"
-            android:visibility="gone"
-            android:layout_width="@dimen/shop_avatar_small"
-            android:layout_height="@dimen/shop_avatar_small"
-            android:layout_marginRight="@dimen/margin_medium"
-            android:scaleType="centerCrop"
-            android:layout_centerVertical="true"
-            style="@style/ShopAvatarSmall" />
+        <!--<ImageView-->
+            <!--android:id="@+id/avatar"-->
+            <!--android:visibility="gone"-->
+            <!--android:layout_width="@dimen/shop_avatar_small"-->
+            <!--android:layout_height="@dimen/shop_avatar_small"-->
+            <!--android:layout_marginRight="@dimen/margin_medium"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--style="@style/ShopAvatarSmall" />-->
+
         <LinearLayout
             android:gravity="center_vertical"
             android:orientation="vertical"
@@ -39,12 +49,24 @@
 
             <TextView
                 android:ellipsize="end"
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text ="Oscar Wilde"
+                style="@style/TextBlack.Larger"
+               />
+
+            <TextView
+                android:ellipsize="end"
                 android:id="@+id/subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:singleLine="true"
                 android:drawablePadding="@dimen/padding_medium"
+                android:text="Inspiration"
                 style="@style/TextLightGrey" />
 
             <LinearLayout
@@ -53,13 +75,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
                 <!--<com.etsy.android.ui.view.RatingIconView android:id="@id/rating" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="@dimen/margin_small" app:starSize="@dimen/review_star_size_small" />-->
-                <TextView
-                    android:id="@+id/rating_count"
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    style="@style/TextGrey.Small" />
+                <!--<TextView-->
+                    <!--android:id="@+id/rating_count"-->
+                    <!--android:text="99"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--style="@style/TextGrey.Small" />-->
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </merge>
+

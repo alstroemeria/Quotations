@@ -22,6 +22,13 @@
 
     <dimen name="text_small">12.0sp</dimen>
     <dimen name="text_medium">14.0sp</dimen>
+    <dimen name="text_larger">18.0sp</dimen>
+
+    <dimen name="divider_height">1.0dip</dimen>
+
+    <dimen name="padding_small">4.0dip</dimen>
+    <dimen name="padding_tiny">2.0dip</dimen>
+    <dimen name="listing_card_fav_padding">6.0dip</dimen>
 
 
 

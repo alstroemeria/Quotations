@@ -17,4 +17,6 @@
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
 
+    <string name="favorite_listing_content_description">Favorite Listing</string>
+
 </resources>

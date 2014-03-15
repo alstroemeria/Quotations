@@ -25,7 +25,7 @@ public class QuotationCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View v = mLayoutInflater.inflate(R.layout.list_item_sample, parent, false);
+        View v = mLayoutInflater.inflate(R.layout.list_item_quote, parent, false);
         return v;
     }
 
