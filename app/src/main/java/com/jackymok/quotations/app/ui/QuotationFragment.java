@@ -5,9 +5,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ScrollView;
 
 import com.jackymok.quotations.app.R;
+import com.jackymok.quotations.app.models.SLTextView;
 import com.jackymok.quotations.app.provider.QuotationContract;
 
 /**
@@ -40,9 +41,16 @@ public class QuotationFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_quotation, container, false);
-        ((TextView) rootView.findViewById(R.id.fragment_quotation_text)).setText("\""+mText+"\"");
-        ((TextView) rootView.findViewById(R.id.fragment_quotation_author)).setText("-"+ mAuthor);
+        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.quotation, container, false);
+        SLTextView textView = ((SLTextView) rootView.findViewById(R.id.fragment_quotation_text));
+        ScrollView scrollView = ((ScrollView) rootView.findViewById(R.id.fragment_quotation_content));
+        scrollView.setFillViewport(true);
+        textView.setLetterSpacing(-3);
+        textView.setLineSpacing(2, (float) 0.8);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textView.setText("\"" + mText + "\"");
+
+        //((TextView) rootView.findViewById(R.id.fragment_quotation_author)).setText("-"+ mAuthor);
 
         return rootView;
     }

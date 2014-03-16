@@ -6,6 +6,7 @@ import android.support.v4.widget.CursorAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.etsy.android.grid.util.DynamicHeightTextView;
 import com.jackymok.quotations.app.R;
@@ -29,29 +30,15 @@ public class QuotationCursorAdapter extends CursorAdapter {
         return v;
     }
 
-    /**
-     * @author will
-     *
-     * @param   v
-     *          The view in which the elements we set up here will be displayed.
-     *
-     * @param   context
-     *          The running context where this ListView adapter will be active.
-     *
-     * @param   c
-     *          The Cursor containing the query results we will display.
-     */
-
     @Override
     public void bindView(View v, Context context, Cursor c) {
         String title = c.getString(c.getColumnIndexOrThrow(QuotationContract.COLUMN_TEXT));
-        /**
-         * Next set the title of the entry.
-         */
+        String author = c.getString(c.getColumnIndexOrThrow(QuotationContract.COLUMN_AUTHOR));
 
         DynamicHeightTextView title_text = (DynamicHeightTextView)v.findViewById(R.id.staggered_text);
-        if (title_text != null) {
-            title_text.setText(title);
-        }
+        TextView author_text = (TextView)v.findViewById(R.id.listing_author);
+
+        title_text.setText(title);
+        author_text.setText(author);
     }
 }

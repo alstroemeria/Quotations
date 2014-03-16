@@ -1,0 +1,24 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_quotation_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none">
+
+    <!-- Dummy content. -->
+    <RelativeLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <com.jackymok.quotations.app.models.SLTextView
+            android:id = "@+id/fragment_quotation_text"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center"
+            android:text="Testing"
+            android:textSize="32dp"
+            android:textColor="@color/flatui_pomegranate"
+            />
+
+    </RelativeLayout>
+</ScrollView>
