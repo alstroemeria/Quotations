@@ -44,11 +44,14 @@ public class QuotationFragment extends Fragment {
         ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.quotation, container, false);
         SLTextView textView = ((SLTextView) rootView.findViewById(R.id.fragment_quotation_text));
         ScrollView scrollView = ((ScrollView) rootView.findViewById(R.id.fragment_quotation_content));
+        scrollView.setBackgroundColor(getResources().getColor(R.color.flatui_belize_hole));
         scrollView.setFillViewport(true);
+        textView.setTypeFace("Lato-Hairline.ttf");
+        textView.setTextColor(getResources().getColor(R.color.flatui_clouds));
         textView.setLetterSpacing(-3);
         textView.setLineSpacing(2, (float) 0.8);
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-        textView.setText("\"" + mText + "\"");
+        textView.setText(mText);
 
         //((TextView) rootView.findViewById(R.id.fragment_quotation_author)).setText("-"+ mAuthor);
 

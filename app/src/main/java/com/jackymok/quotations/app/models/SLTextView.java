@@ -23,27 +23,23 @@ public class SLTextView extends TextView {
     private boolean mNegativeLineSpacing = false;
     private float letterSpacing = 0; // normal
     private CharSequence originalText = "";
+    private Context mContext;
     TextLinkClickListener mListener;
 
     public SLTextView(Context context) {
         super(context);
-
-        Typeface font = FontFactory.getInstance().getFont(context, "OldStandard-Regular.ttf");
-        this.setTypeface(font);
+        mContext = context;
     }
 
     public SLTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        mContext = context;
 
-        Typeface font = FontFactory.getInstance().getFont(context, "OldStandard-Regular.ttf");
-        this.setTypeface(font);
     }
 
     public SLTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        Typeface font = FontFactory.getInstance().getFont(context, "OldStandard-Regular.ttf");
-        this.setTypeface(font);
+        mContext = context;
     }
 
     /* clickable links */
@@ -86,6 +82,11 @@ public class SLTextView extends TextView {
             if (truncatedHeight < 0) truncatedHeight = truncatedHeight * -1;
             setMeasuredDimension(getMeasuredWidth(), getMeasuredHeight() + truncatedHeight);
         }
+    }
+
+    public void setTypeFace(String typeface){
+        Typeface font = FontFactory.getInstance().getFont(mContext, typeface);
+        this.setTypeface(font);
     }
 
 

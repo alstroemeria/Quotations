@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 import com.jackymok.quotations.app.R;
 
-public class HomeActivity extends BaseActivity implements CategoryFragment.onListViewItemClickedListener {
+public class HomeActivity extends BaseActivity implements CategoryFragment.onListViewItemClickedListener, StaggeredGridFragment.onGridViewItemClickedListener {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -55,6 +55,17 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
         }
         // Handle action buttons
         return super.onOptionsItemSelected(item);
+    }
+
+    //================================================================================
+    // GRIDFRAGMENT
+    //================================================================================
+    @Override
+    public void onGridViewItemClicked(long id, String category) {
+        Intent intent = new Intent(this, QuotationActivity.class);
+        intent.putExtra(QuotationActivity.CATEGORY_ID, id);
+        intent.putExtra(QuotationActivity.CATEGORY_KEY, category);
+        startActivity(intent);
     }
 
     //================================================================================

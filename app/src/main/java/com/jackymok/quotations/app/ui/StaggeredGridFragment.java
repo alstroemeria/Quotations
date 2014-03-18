@@ -1,6 +1,7 @@
 package com.jackymok.quotations.app.ui;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.etsy.android.grid.StaggeredGridView;
 import com.jackymok.quotations.app.R;
@@ -24,6 +26,7 @@ import com.jackymok.quotations.app.provider.QuotationProvider;
 
 public class StaggeredGridFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
     private QuotationCursorAdapter mCursorAdapter;
+    private onGridViewItemClickedListener mListener;
 
     @Override
     public void onCreate(Bundle savedInstanceState){
@@ -41,8 +44,36 @@ public class StaggeredGridFragment extends Fragment implements LoaderManager.Loa
 
         mCursorAdapter = new QuotationCursorAdapter(getActivity().getApplicationContext(), null, 0);
         staggeredGridView.setAdapter(mCursorAdapter);
+        staggeredGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Cursor cursor = mCursorAdapter.getCursor();
+                cursor.moveToPosition(position);
+                long quotationId = cursor.getLong(cursor.getColumnIndex(QuotationContract.COLUMN_ID));
+                mListener.onGridViewItemClicked(quotationId, "placeholder");
+            }
+        });
         getActivity().getSupportLoaderManager().initLoader(0, null, this);
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof onGridViewItemClickedListener) {
+            mListener = (onGridViewItemClickedListener) activity;
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+
+    public interface onGridViewItemClickedListener {
+        public void onGridViewItemClicked(long id, String category);
     }
 
     //================================================================================
