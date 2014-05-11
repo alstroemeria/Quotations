@@ -2,9 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.jackymok.quotations.app" >
 
+    <uses-sdk android:minSdkVersion="10"
+        android:targetSdkVersion="19"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 
     <application
-        android:allowBackup="true"
+    android:name="com.jackymok.quotations.app.AppController"
+    android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >

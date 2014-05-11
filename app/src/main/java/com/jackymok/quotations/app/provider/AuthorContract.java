@@ -4,23 +4,23 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 /**
- * Created by Jacky on 09/03/14.
+ * Created by Jacky on 10/05/14.
  */
-public class CategoryContract {
-    public static final String TABLE_CATEGORY= "category";
+public class AuthorContract {
+    public static final String TABLE_AUTHOR= "author";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_CATEGORY = "category";
+    public static final String COLUMN_NAME = "name";
     public static final String COLUMN_FAVOURITE = "favourite";
 
     private static final String DATABASE_CREATE = "create table "
-            + TABLE_CATEGORY
+            + TABLE_AUTHOR
             + "("
             + COLUMN_ID + " integer primary key autoincrement, "
-            + COLUMN_CATEGORY + " text not null,"
+            + COLUMN_NAME + " text not null,"
             + COLUMN_FAVOURITE + " integer not null"
             + ");";
 
-    public static void onCreate(SQLiteDatabase database){
+    public static void onCreate(SQLiteDatabase database) {
         database.execSQL(DATABASE_CREATE);
     }
 
@@ -28,7 +28,7 @@ public class CategoryContract {
         Log.w(QuotationContract.class.getName(), "Upgrading database from version "
                 + oldVersion + " to " + newVersion
                 + ", which will destroy all old data");
-        database.execSQL("DROP TABLE ID EXISTS" + TABLE_CATEGORY);
+        database.execSQL("DROP TABLE ID EXISTS" + TABLE_AUTHOR);
         onCreate(database);
     }
 }

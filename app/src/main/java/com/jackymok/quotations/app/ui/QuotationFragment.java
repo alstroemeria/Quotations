@@ -50,7 +50,7 @@ public class QuotationFragment extends Fragment {
         textView.setTextColor(getResources().getColor(R.color.flatui_clouds));
         textView.setLetterSpacing(-3);
         textView.setLineSpacing(2, (float) 0.8);
-        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER); 
         textView.setText(mText);
 
         //((TextView) rootView.findViewById(R.id.fragment_quotation_author)).setText("-"+ mAuthor);

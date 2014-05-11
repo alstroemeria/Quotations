@@ -19,12 +19,14 @@ public class QuotationDatabase  extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        AuthorContract.onCreate(db);
         QuotationContract.onCreate(db);
         CategoryContract.onCreate(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        AuthorContract.onUpgrade(db,oldVersion,newVersion);
         QuotationContract.onUpgrade(db,oldVersion,newVersion);
         CategoryContract.onUpgrade(db,oldVersion,newVersion);
     }

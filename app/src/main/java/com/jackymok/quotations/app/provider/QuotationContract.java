@@ -10,21 +10,21 @@ public class QuotationContract {
 
     public static final String TABLE_QUOTATION = "quotation";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_TEXT = "text";
-    public static final String COLUMN_CATEGORY = "category";
     public static final String COLUMN_AUTHOR = "author";
+    public static final String COLUMN_CATEGORY = "category";
+    public static final String COLUMN_TEXT = "text";
     public static final String COLUMN_FAVOURITE = "favourite";
-    public static final String COLUMN_READ = "read";
+    public static final String COLUMN_SEEN = "seen";
 
     private static final String DATABASE_CREATE = "create table "
             + TABLE_QUOTATION
             + "("
             + COLUMN_ID + " integer primary key autoincrement, "
-            + COLUMN_TEXT + " text not null,"
-            + COLUMN_CATEGORY + " integer not null,"
             + COLUMN_AUTHOR + " text not null,"
-            + COLUMN_FAVOURITE + " integer not null,"
-            + COLUMN_READ + " integer not null"
+            + COLUMN_CATEGORY + " integer not null,"
+            + COLUMN_TEXT + " text not null,"
+            + COLUMN_FAVOURITE + " integer default 0,"
+            + COLUMN_SEEN + " integer default 0"
             + ");";
 
     public static void onCreate(SQLiteDatabase database){

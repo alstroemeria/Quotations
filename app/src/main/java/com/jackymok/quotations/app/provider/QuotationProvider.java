@@ -23,14 +23,20 @@ public class QuotationProvider extends ContentProvider {
     private static final int QUOTATION_ID = 20;
     private static final int CATEGORIES = 30;
     private static final int CATEGORY_ID = 40;
+    private static final int AUTHORS = 50;
+    private static final int AUTHOR_ID = 60;
 
     private static String AUTHORITY = "com.jackymok.quotations.app.provider";
 
     private static final String PATH_QUOTATIONS = "quotations";
     private static final String PATH_CATEGORIES = "categories";
+    private static final String PATH_AUTHORS = "authors";
+
 
     public static final Uri CONTENT_URI_QUOTAIONS = Uri.parse("content://" + AUTHORITY + "/" + PATH_QUOTATIONS);
     public static final Uri CONTENT_URI_CATEGORIES = Uri.parse("content://" + AUTHORITY + "/" + PATH_CATEGORIES);
+    public static final Uri CONTENT_URI_AUTHORS = Uri.parse("content://" + AUTHORITY + "/" + PATH_AUTHORS);
+
 
     public static final String CONTENT_TYPE_QUOTATION = ContentResolver.CURSOR_DIR_BASE_TYPE
             + "/quotations";
@@ -40,6 +46,11 @@ public class QuotationProvider extends ContentProvider {
             + "/categories";
     public static final String CONTENT_ITEM_TYPE_CATEGORY = ContentResolver.CURSOR_ITEM_BASE_TYPE
             + "/category";
+    public static final String CONTENT_TYPE_AUTHOR = ContentResolver.CURSOR_DIR_BASE_TYPE
+            + "/authors";
+    public static final String CONTENT_ITEM_TYPE_AUTHOR = ContentResolver.CURSOR_ITEM_BASE_TYPE
+            + "/author";
+
 
     private static final UriMatcher sURIMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     static {
@@ -47,6 +58,8 @@ public class QuotationProvider extends ContentProvider {
         sURIMatcher.addURI(AUTHORITY, PATH_QUOTATIONS + "/#", QUOTATION_ID);
         sURIMatcher.addURI(AUTHORITY, PATH_CATEGORIES, CATEGORIES);
         sURIMatcher.addURI(AUTHORITY, PATH_CATEGORIES + "/#", CATEGORIES);
+        sURIMatcher.addURI(AUTHORITY, PATH_AUTHORS, AUTHORS);
+        sURIMatcher.addURI(AUTHORITY, PATH_AUTHORS + "/#", AUTHORS);
     }
 
     @Override
@@ -59,7 +72,7 @@ public class QuotationProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection, String[] selectionArgs, String sortOrder) {
 
         SQLiteQueryBuilder queryBuilder = new SQLiteQueryBuilder();
-        checkColumns(projection);
+        //checkColumns(projection);
 
         int uriType = sURIMatcher.match(uri);
 
@@ -78,6 +91,13 @@ public class QuotationProvider extends ContentProvider {
             case CATEGORY_ID:
                 queryBuilder.setTables(CategoryContract.TABLE_CATEGORY);
                 queryBuilder.appendWhere(CategoryContract.COLUMN_ID + "=" + uri.getLastPathSegment());
+                break;
+            case AUTHORS:
+                queryBuilder.setTables(AuthorContract.TABLE_AUTHOR);
+                break;
+            case AUTHOR_ID:
+                queryBuilder.setTables(AuthorContract.TABLE_AUTHOR);
+                queryBuilder.appendWhere(AuthorContract.COLUMN_ID + "=" + uri.getLastPathSegment());
                 break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
@@ -110,11 +130,48 @@ public class QuotationProvider extends ContentProvider {
                 id = db.replace(CategoryContract.TABLE_CATEGORY, null, values);
                 returnValue =  Uri.parse(PATH_QUOTATIONS + "/"+id);
                 break;
+            case AUTHORS:
+                id = db.replace(AuthorContract.TABLE_AUTHOR, null, values);
+                returnValue =  Uri.parse(PATH_QUOTATIONS + "/"+id);
+                break;
             default:
                 throw new IllegalArgumentException("Unknown URI: " + uri);
         }
         getContext().getContentResolver().notifyChange(uri,null);
         return returnValue;
+    }
+
+    @Override
+    public int bulkInsert(Uri uri, ContentValues[] values){
+        int numInserted = 0;
+        String table = "";
+
+        int uriType = sURIMatcher.match(uri);
+
+        switch (uriType) {
+            case QUOTATIONS:
+                table = QuotationContract.TABLE_QUOTATION;
+                break;
+            case CATEGORIES:
+                table = CategoryContract.TABLE_CATEGORY;
+                break;
+        }
+        SQLiteDatabase sqlDB = database.getWritableDatabase();
+        sqlDB.beginTransaction();
+        try {
+            for (ContentValues cv : values) {
+                long newID = sqlDB.replace(table, null, cv);
+//                if (newID <= 0) {
+//                    throw new SQLException("Failed to insert row into " + uri);
+//                }
+            }
+            sqlDB.setTransactionSuccessful();
+            getContext().getContentResolver().notifyChange(uri, null);
+            numInserted = values.length;
+        } finally {
+            sqlDB.endTransaction();
+        }
+        return numInserted;
     }
 
     @Override
@@ -174,7 +231,7 @@ public class QuotationProvider extends ContentProvider {
 
     private void checkColumns(String[] projection) {
         String[] available = { QuotationContract.COLUMN_CATEGORY,
-                QuotationContract.COLUMN_READ, QuotationContract.COLUMN_FAVOURITE,
+                QuotationContract.COLUMN_SEEN, QuotationContract.COLUMN_FAVOURITE,
                 QuotationContract.COLUMN_ID, QuotationContract.COLUMN_AUTHOR,
                 QuotationContract.COLUMN_TEXT};
         if (projection != null) {

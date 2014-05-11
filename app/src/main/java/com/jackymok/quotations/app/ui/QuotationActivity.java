@@ -91,7 +91,7 @@ public class QuotationActivity extends BaseActivity implements LoaderManager.Loa
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         String[] projection = {QuotationContract.COLUMN_ID,QuotationContract.COLUMN_TEXT,
                 QuotationContract.COLUMN_AUTHOR, QuotationContract.COLUMN_FAVOURITE,
-                 QuotationContract.COLUMN_READ, QuotationContract.COLUMN_CATEGORY};
+                 QuotationContract.COLUMN_SEEN, QuotationContract.COLUMN_CATEGORY};
         CursorLoader cursorLoader = new CursorLoader(this, QuotationProvider.CONTENT_URI_QUOTAIONS,
                 projection, filter , null, null);
         mPagerAdapter.setProjection(projection);
