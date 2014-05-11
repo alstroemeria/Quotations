@@ -33,7 +33,7 @@ public class QuotationProvider extends ContentProvider {
     private static final String PATH_AUTHORS = "authors";
 
 
-    public static final Uri CONTENT_URI_QUOTAIONS = Uri.parse("content://" + AUTHORITY + "/" + PATH_QUOTATIONS);
+    public static final Uri CONTENT_URI_QUOTATIONS = Uri.parse("content://" + AUTHORITY + "/" + PATH_QUOTATIONS);
     public static final Uri CONTENT_URI_CATEGORIES = Uri.parse("content://" + AUTHORITY + "/" + PATH_CATEGORIES);
     public static final Uri CONTENT_URI_AUTHORS = Uri.parse("content://" + AUTHORITY + "/" + PATH_AUTHORS);
 
@@ -57,9 +57,9 @@ public class QuotationProvider extends ContentProvider {
         sURIMatcher.addURI(AUTHORITY, PATH_QUOTATIONS, QUOTATIONS);
         sURIMatcher.addURI(AUTHORITY, PATH_QUOTATIONS + "/#", QUOTATION_ID);
         sURIMatcher.addURI(AUTHORITY, PATH_CATEGORIES, CATEGORIES);
-        sURIMatcher.addURI(AUTHORITY, PATH_CATEGORIES + "/#", CATEGORIES);
+        sURIMatcher.addURI(AUTHORITY, PATH_CATEGORIES + "/#", CATEGORY_ID);
         sURIMatcher.addURI(AUTHORITY, PATH_AUTHORS, AUTHORS);
-        sURIMatcher.addURI(AUTHORITY, PATH_AUTHORS + "/#", AUTHORS);
+        sURIMatcher.addURI(AUTHORITY, PATH_AUTHORS + "/#", AUTHOR_ID);
     }
 
     @Override
@@ -154,6 +154,9 @@ public class QuotationProvider extends ContentProvider {
                 break;
             case CATEGORIES:
                 table = CategoryContract.TABLE_CATEGORY;
+                break;
+            case AUTHORS:
+                table = AuthorContract.TABLE_AUTHOR;
                 break;
         }
         SQLiteDatabase sqlDB = database.getWritableDatabase();

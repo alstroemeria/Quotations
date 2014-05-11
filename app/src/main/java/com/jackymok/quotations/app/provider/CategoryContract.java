@@ -9,15 +9,15 @@ import android.util.Log;
 public class CategoryContract {
     public static final String TABLE_CATEGORY= "category";
     public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_CATEGORY = "category";
+    public static final String COLUMN_NAME = "name";
     public static final String COLUMN_FAVOURITE = "favourite";
 
     private static final String DATABASE_CREATE = "create table "
             + TABLE_CATEGORY
             + "("
             + COLUMN_ID + " integer primary key autoincrement, "
-            + COLUMN_CATEGORY + " text not null,"
-            + COLUMN_FAVOURITE + " integer not null"
+            + COLUMN_NAME + " text not null,"
+            + COLUMN_FAVOURITE + " integer default 0"
             + ");";
 
     public static void onCreate(SQLiteDatabase database){

@@ -16,8 +16,8 @@ public class AuthorContract {
             + TABLE_AUTHOR
             + "("
             + COLUMN_ID + " integer primary key autoincrement, "
-            + COLUMN_NAME + " text not null,"
-            + COLUMN_FAVOURITE + " integer not null"
+            + COLUMN_NAME + " text not null, "
+            + COLUMN_FAVOURITE + " integer default 0"
             + ");";
 
     public static void onCreate(SQLiteDatabase database) {

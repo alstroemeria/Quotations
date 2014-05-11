@@ -17,7 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.jackymok.quotations.app.R;
-import com.jackymok.quotations.app.services.QuoteRequest;
+import com.jackymok.quotations.app.services.QuotationRequest;
 
 public class HomeActivity extends BaseActivity implements CategoryFragment.onListViewItemClickedListener, StaggeredGridFragment.onGridViewItemClickedListener {
     private DrawerLayout mDrawerLayout;
@@ -33,7 +33,7 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
         setContentView(R.layout.activity_main);
 
         setupDrawer();
-        QuoteRequest quoteRequest = new QuoteRequest(getApplicationContext());
+        QuotationRequest quoteRequest = new QuotationRequest(getApplicationContext());
         quoteRequest.Fetch();
         if (savedInstanceState == null) {
             selectItem(0);

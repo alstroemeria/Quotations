@@ -84,7 +84,7 @@ public class StaggeredGridFragment extends Fragment implements LoaderManager.Loa
         String[] projection = {QuotationContract.COLUMN_ID,QuotationContract.COLUMN_TEXT,
                 QuotationContract.COLUMN_AUTHOR, QuotationContract.COLUMN_FAVOURITE,
                 QuotationContract.COLUMN_SEEN, QuotationContract.COLUMN_CATEGORY};
-        CursorLoader cursorLoader = new CursorLoader(getActivity().getApplicationContext(), QuotationProvider.CONTENT_URI_QUOTAIONS,
+        CursorLoader cursorLoader = new CursorLoader(getActivity().getApplicationContext(), QuotationProvider.CONTENT_URI_QUOTATIONS,
                 projection, null , null, null);
         return cursorLoader;
     }
