@@ -153,8 +153,11 @@ public class HomeActivity extends BaseActivity implements CategoryFragment.onLis
         switch (position){
             default:
             case 0:
+//                transaction.beginTransaction()
+//                        .replace(R.id.content_frame,new StaggeredGridFragment(),"STAGGERED_GRID_FRAGMENT")
+//                        .commit();
                 transaction.beginTransaction()
-                        .replace(R.id.content_frame,new StaggeredGridFragment(),"STAGGERED_GRID_FRAGMENT")
+                        .replace(R.id.content_frame,new FeatureFragment(),"FEATURE_FRAGMENT")
                         .commit();
                 break;
             case 1:

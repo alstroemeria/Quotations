@@ -53,7 +53,6 @@ public class QuotationFragment extends Fragment {
         textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER); 
         textView.setText(mText);
 
-        //((TextView) rootView.findViewById(R.id.fragment_quotation_author)).setText("-"+ mAuthor);
 
         return rootView;
     }

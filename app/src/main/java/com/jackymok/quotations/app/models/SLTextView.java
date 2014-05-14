@@ -11,7 +11,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.TextView;
 
-import com.jackymok.quotations.app.utils.FontFactory;
+
+import com.jackymok.quotations.app.AppController;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,18 +29,14 @@ public class SLTextView extends TextView {
 
     public SLTextView(Context context) {
         super(context);
-        mContext = context;
     }
 
     public SLTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mContext = context;
-
     }
 
     public SLTextView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        mContext = context;
     }
 
     /* clickable links */
@@ -85,7 +82,7 @@ public class SLTextView extends TextView {
     }
 
     public void setTypeFace(String typeface){
-        Typeface font = FontFactory.getInstance().getFont(mContext, typeface);
+        Typeface font = AppController.getInstance().getFont(typeface);
         this.setTypeface(font);
     }
 

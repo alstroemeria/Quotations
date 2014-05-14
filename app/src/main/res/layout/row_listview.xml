@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-thin"
         android:text="Category Title"
-        android:textSize="36dp"
+        android:textSize="18dp"
         android:id="@+id/listing_title"
         android:layout_gravity="left|center_vertical"/>
 

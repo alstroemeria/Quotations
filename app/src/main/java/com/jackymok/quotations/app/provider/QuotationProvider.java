@@ -79,7 +79,15 @@ public class QuotationProvider extends ContentProvider {
 
         switch (uriType){
             case QUOTATIONS:
-                queryBuilder.setTables(QuotationContract.TABLE_QUOTATION);
+                //:TODO refactor implicit logic. Where joint parts are currently specified in the projection
+                String table = String.format("%s LEFT OUTER JOIN %s ON (%s.%s = %s.%s)",
+                        QuotationContract.TABLE_QUOTATION,
+                        AuthorContract.TABLE_AUTHOR,
+                        QuotationContract.TABLE_QUOTATION,
+                        QuotationContract.COLUMN_AUTHOR,
+                        AuthorContract.TABLE_AUTHOR,
+                        AuthorContract.COLUMN_ID );
+                queryBuilder.setTables(table);
                 break;
             case QUOTATION_ID:
                 queryBuilder.setTables(QuotationContract.TABLE_QUOTATION);

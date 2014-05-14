@@ -23,9 +23,10 @@ public class QuotationRequest {
     }
 
     public void Fetch(){
-        volleyRequest.Fetch("http://quotey.herokuapp.com/api/v1/quotes",new QuoteParser() );
-        volleyRequest.Fetch("http://quotey.herokuapp.com/api/v1/categories",new CategoryParser() );
-        volleyRequest.Fetch("http://quotey.herokuapp.com/api/v1/authors",new AuthorParser() );
+        String path = "http://quotey.herokuapp.com/api/v1/";
+        volleyRequest.Fetch(path + "quotes/",new QuoteParser() );
+        volleyRequest.Fetch(path + "categories",new CategoryParser() );
+        //volleyRequest.Fetch(path + "authors",new AuthorParser() );
     }
 
     class QuoteParser implements VolleyCallback{
@@ -45,6 +46,18 @@ public class QuotationRequest {
                     values[i].put("author", quote.getInt("author_id"));
                 }
                 context.getContentResolver().bulkInsert(QuotationProvider.CONTENT_URI_QUOTATIONS,values);
+
+                JSONArray authors = response.getJSONArray("authors");
+                values = new ContentValues[authors.length()];
+                JSONObject author;
+                for (int i = 0; i < authors.length(); i++) {
+                    values[i] = new ContentValues();
+                    author = authors.getJSONObject(i);
+                    values[i].put("_id", author.getInt("id"));
+                    values[i].put("name", author.getString("name"));
+                }
+                context.getContentResolver().bulkInsert(QuotationProvider.CONTENT_URI_AUTHORS,values);
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -72,26 +85,6 @@ public class QuotationRequest {
         }
     }
 
-    class AuthorParser implements VolleyCallback{
-        @Override
-        public void jsonResponse(JSONObject response) {
-            Log.d("Volley", response.toString());
-            try {
-                JSONArray quotes = response.getJSONArray("authors");
-                ContentValues[] values = new ContentValues[quotes.length()];
-                JSONObject quote;
-                for (int i = 0; i < quotes.length(); i++) {
-                    values[i] = new ContentValues();
-                    quote = quotes.getJSONObject(i);
-                    values[i].put("_id", quote.getInt("id"));
-                    values[i].put("name", quote.getString("name"));
-                }
-                context.getContentResolver().bulkInsert(QuotationProvider.CONTENT_URI_AUTHORS,values);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
 
 
 }

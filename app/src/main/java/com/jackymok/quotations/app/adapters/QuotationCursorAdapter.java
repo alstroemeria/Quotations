@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.etsy.android.grid.util.DynamicHeightTextView;
 import com.jackymok.quotations.app.R;
+import com.jackymok.quotations.app.provider.AuthorContract;
 import com.jackymok.quotations.app.provider.QuotationContract;
 
 /**
@@ -26,19 +26,25 @@ public class QuotationCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View v = mLayoutInflater.inflate(R.layout.list_item_quote, parent, false);
+        View v = mLayoutInflater.inflate(R.layout.row_item_quote, parent, false);
         return v;
     }
 
     @Override
     public void bindView(View v, Context context, Cursor c) {
         String title = c.getString(c.getColumnIndexOrThrow(QuotationContract.COLUMN_TEXT));
-        String author = c.getString(c.getColumnIndexOrThrow(QuotationContract.COLUMN_AUTHOR));
+        String author = c.getString(c.getColumnIndexOrThrow(AuthorContract.COLUMN_NAME));
 
-        DynamicHeightTextView title_text = (DynamicHeightTextView)v.findViewById(R.id.staggered_text);
-        TextView author_text = (TextView)v.findViewById(R.id.listing_author);
+        TextView title_text = (TextView)v.findViewById(R.id.row_item_quote_text);
+        TextView author_text = (TextView)v.findViewById(R.id.row_item_quote_author);
+
+
 
         title_text.setText(title);
         author_text.setText(author);
+
+        //title_text.setTypeface( AppController.getInstance().getFont("Vollkorn-Italic.ttf"));
+        //author_text.setTypeface( AppController.getInstance().getFont("Vollkorn-Regular.ttf"));
+
     }
 }
