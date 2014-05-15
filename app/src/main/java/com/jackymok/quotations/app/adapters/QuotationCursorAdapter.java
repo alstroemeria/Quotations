@@ -40,8 +40,8 @@ public class QuotationCursorAdapter extends CursorAdapter {
 
 
 
-        title_text.setText(title);
-        author_text.setText(author);
+        title_text.setText(String.format("\"%s\"",title));
+        author_text.setText(String.format("-%s",author));
 
         //title_text.setTypeface( AppController.getInstance().getFont("Vollkorn-Italic.ttf"));
         //author_text.setTypeface( AppController.getInstance().getFont("Vollkorn-Regular.ttf"));

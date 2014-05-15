@@ -12,7 +12,7 @@ import android.text.TextPaint;
 import android.text.style.MetricAffectingSpan;
 import android.util.TypedValue;
 
-import com.jackymok.quotations.app.R;
+import com.jackymok.quotations.app.AppController;
 
 
 public class TypefaceSpan extends MetricAffectingSpan {
@@ -29,15 +29,14 @@ public class TypefaceSpan extends MetricAffectingSpan {
         mContext = context;
 
         if (mTypeface == null) {
-            mTypeface = Typeface.createFromAsset(mContext.getApplicationContext()
-                    .getAssets(), String.format("fonts/%s", typefaceName));
+            mTypeface = AppController.getInstance().getFont(typefaceName);
 
             // Cache the loaded Typeface
             sTypefaceCache.put(typefaceName, mTypeface);
         }
     }
     private void modifyPaint(TextPaint p) {
-        int MY_DIP_VALUE = 32;
+        int MY_DIP_VALUE = 16;
         int pixel= (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 MY_DIP_VALUE, mContext.getResources().getDisplayMetrics());
 
@@ -46,7 +45,7 @@ public class TypefaceSpan extends MetricAffectingSpan {
         p.setFlags(p.getFlags() | Paint.SUBPIXEL_TEXT_FLAG);
         p.setTextSize(pixel);//or what ever size you want
 
-        p.setColor( mContext.getResources().getColor(R.color.flatui_belize_hole));
+       // p.setColor( mContext.getResources().getColor(R.color.flatui_belize_hole));
 
     }
 

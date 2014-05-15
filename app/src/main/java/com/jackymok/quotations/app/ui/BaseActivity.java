@@ -18,7 +18,7 @@ public class BaseActivity extends ActionBarActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setActionBar("quotations");
+        //setActionBar("Q U O T A T I O N");
 
     }
 
@@ -45,7 +45,7 @@ public class BaseActivity extends ActionBarActivity{
 
     private void setActionBar(String title) {
         SpannableString s = new SpannableString(title);
-        s.setSpan(new TypefaceSpan(this, "Roboto-Thin.ttf"), 0, s.length(),
+        s.setSpan(new TypefaceSpan(this, "Roboto-Light.ttf"), 0, s.length(),
                 Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 

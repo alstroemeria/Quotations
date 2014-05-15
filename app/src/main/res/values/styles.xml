@@ -1,9 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
-        <!-- Customize your theme here. -->
-    </style>
 
     <style name="ShopAvatarSmall">
         <item name="android:background">@drawable/bg_avatar_rounded_square_small_borderless</item>
@@ -61,20 +57,26 @@
     <item type="dimen" name="listing_card_shadow_padding">@dimen/card_shadow_padding</item>
 
 
-    <style name="TextGreen" parent="@style/TextGrey">
-        <item name="android:textColor">@color/the_color_of_money</item>
+
+    <style name="Widget" />
+
+    <style name="Widget.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
     </style>
-    <style name="TextGreen.Bold" parent="@style/TextGreen">
-        <item name="android:textStyle">bold</item>
+
+    <style name="Widget.Light" />
+
+    <style name="Widget.Light.ActionBar" parent="@style/Widget.AppCompat.Light.ActionBar.Solid">
     </style>
-    <style name="TextGreen.Larger" parent="@style/TextGreen">
-        <item name="android:textSize">@dimen/text_larger</item>
+
+    <style name="Widget.ActionBar.Transparent">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
     </style>
-    <style name="TextGreen.Larger.Bold" parent="@style/TextGreen.Larger">
-        <item name="android:textStyle">bold</item>
+
+    <style name="Widget.Light.ActionBar.Transparent">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="background">@android:color/transparent</item>
     </style>
-    <style name="TextGreen.Small" parent="@style/TextGreen">
-        <item name="android:textSize">@dimen/text_small</item>
-    </style>
+
 
 </resources>

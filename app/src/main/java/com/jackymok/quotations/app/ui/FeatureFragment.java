@@ -13,6 +13,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.jackymok.quotations.app.R;
@@ -20,11 +22,15 @@ import com.jackymok.quotations.app.adapters.QuotationCursorAdapter;
 import com.jackymok.quotations.app.provider.AuthorContract;
 import com.jackymok.quotations.app.provider.QuotationContract;
 import com.jackymok.quotations.app.provider.QuotationProvider;
+import com.manuelpeinado.fadingactionbar.extras.actionbarcompat.FadingActionBarHelper;
 
 /**
  * Created by Jacky on 2014-05-13.
  */
 public class FeatureFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+    private ArrayAdapter<String> adapter;
+
+    private FadingActionBarHelper mFadingHelper;
     private QuotationCursorAdapter mCursorAdapter;
     private onGridViewItemClickedListener mListener;
 
@@ -36,8 +42,12 @@ public class FeatureFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState){
-        ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_feature, container, false);
-        ListView listView = (ListView) rootView.findViewById(R.id.listView);
+
+        View view = mFadingHelper.createView(inflater);
+        ImageView img = (ImageView) view.findViewById(R.id.image_header);
+        img.setImageResource(R.drawable.tokyo);
+
+        ListView listView = (ListView) view.findViewById(android.R.id.list);
 
         mCursorAdapter = new QuotationCursorAdapter(getActivity().getApplicationContext(), null, 0);
         listView.setAdapter(mCursorAdapter);
@@ -47,27 +57,36 @@ public class FeatureFragment extends Fragment implements LoaderManager.LoaderCal
                 Cursor cursor = mCursorAdapter.getCursor();
                 cursor.moveToPosition(position);
                 long quotationId = cursor.getLong(cursor.getColumnIndex(QuotationContract.COLUMN_ID));
-                mListener.onGridViewItemClicked(quotationId, "placeholder");
+                //mListener.onGridViewItemClicked(quotationId, "placeholder");
             }
         });
         getActivity().getSupportLoaderManager().initLoader(0, null, this);
-        return rootView;
+
+        return view;
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        if (activity instanceof onGridViewItemClickedListener) {
-            mListener = (onGridViewItemClickedListener) activity;
-        }
+//        if (activity instanceof onGridViewItemClickedListener) {
+//            mListener = (onGridViewItemClickedListener) activity;
+//        }
+
+        int actionBarBg = R.drawable.ab_background;
+
+        mFadingHelper = new FadingActionBarHelper()
+                .actionBarBackground(actionBarBg)
+                .headerLayout(R.layout.header_light)
+                .contentLayout(R.layout.activity_listview)
+                .lightActionBar(actionBarBg == R.drawable.ab_background_light);
+        mFadingHelper.initActionBar(activity);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        //mListener = null;
     }
-
 
     public interface onGridViewItemClickedListener {
         public void onGridViewItemClicked(long id, String category);
